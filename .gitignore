@@ -1,0 +1,52 @@
+# Visual Studio e arquivos de build
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Diretórios de build e publicação
+bin/
+obj/
+obj/Debug/
+out/
+TestResults/
+
+# Arquivos de pacotes do NuGet
+*.nupkg
+packages/
+
+# Arquivos de log e temporários
+*.log
+*.tlog
+*.lastbuildstate
+
+# Configurações locais
+appsettings.*.json
+secrets.json
+
+# Arquivos gerados pelo Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Arquivos do Resharper, Rider e Code Analysis
+_ReSharper*/
+*.DotSettings.user
+
+# Arquivos de cache do Visual Studio Code
+.vscode/
+
+# Dependências do .NET Core e do Entity Framework
+project.lock.json
+artifacts/
+migrations/
+
+# Certificados de desenvolvimento
+*.pfx
+*.snk
+
+# Docker e Kubernetes
+**/.dockerignore
+**/Dockerfile
+**/.helm/
