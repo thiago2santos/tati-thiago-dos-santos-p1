@@ -16,7 +16,7 @@ namespace tati_thiago_dos_santos_p1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new WarSpoting());
         }
     }
 }

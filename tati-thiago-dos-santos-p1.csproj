@@ -55,6 +55,13 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Loss.cs" />
+    <Compile Include="WarSpoting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarSpoting.Designer.cs">
+      <DependentUpon>WarSpoting.cs</DependentUpon>
+    </Compile>
     <Compile Include="LearnBackgroundWorker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +79,9 @@
     <Compile Include="User.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarSpoting.resx">
+      <DependentUpon>WarSpoting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LearnBackgroundWorker.resx">
       <DependentUpon>LearnBackgroundWorker.cs</DependentUpon>
@@ -104,6 +114,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="Anotacoes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
