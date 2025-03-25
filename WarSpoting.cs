@@ -13,15 +13,12 @@ namespace tati_thiago_dos_santos_p1 {
         private async Task<LossResponse> GetLossesAsync(string date) {
             string url = $"https://ukr.warspotting.net/api/losses/russia/{date}/";
             using (HttpClient client = new HttpClient()) {
+                client.Timeout = TimeSpan.FromSeconds(100);
                 HttpResponseMessage response = await client.GetAsync(url);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<LossResponse>(responseBody);
             }
-        }
-
-        private async void dateTimePicker_ValueChanged(object sender, EventArgs e) {
-
         }
 
         private void dateTimePicker_Enter(object sender, EventArgs e) {
@@ -30,7 +27,7 @@ namespace tati_thiago_dos_santos_p1 {
             progressBar.Value = 0;
         }
 
-        private async void dateTimePicker_MouseDown(object sender, MouseEventArgs e) {
+        private async void btnConsultarPerdas_Click(object sender, EventArgs e) {
             string formattedDate = dateTimePicker.Value.ToString("yyyy-MM-dd");
             listBox.Items.Add($"Consultando perdas para a data: {formattedDate}");
 
