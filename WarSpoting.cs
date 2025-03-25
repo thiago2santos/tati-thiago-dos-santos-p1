@@ -8,6 +8,19 @@ namespace tati_thiago_dos_santos_p1 {
     public partial class WarSpoting : Form {
         public WarSpoting() {
             InitializeComponent();
+            listView.View = View.Details;
+            listView.FullRowSelect = true;
+            listView.GridLines = true;
+            listView.Columns.Add("ID", 50);
+            listView.Columns.Add("Tipo", 100);
+            listView.Columns.Add("Modelo", 100);
+            listView.Columns.Add("Status", 100);
+            listView.Columns.Add("Perdido por", 100);
+            listView.Columns.Add("Data", 100);
+            listView.Columns.Add("Local mais próximo", 100);
+            listView.Columns.Add("Geo", 100);
+            listView.Columns.Add("Unidade", 100);
+            listView.Columns.Add("Tags", 100);
         }
 
         private async Task<LossResponse> GetLossesAsync(string date) {
