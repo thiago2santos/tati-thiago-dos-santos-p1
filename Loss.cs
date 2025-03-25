@@ -12,7 +12,7 @@ namespace tati_thiago_dos_santos_p1 {
         public string NearestLocation { get; set; }
         public string Geo { get; set; }
         public string Unit { get; set; }
-        public List<string> Tags { get; set; }
+        public string Tags { get; set; }
     }
 
     public class LossResponse {
