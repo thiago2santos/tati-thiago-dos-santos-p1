@@ -26,38 +26,42 @@ namespace tati_thiago_dos_santos_p1 {
         private async Task<LossResponse> GetLossesAsync(string date) {
             string url = $"https://ukr.warspotting.net/api/losses/russia/{date}/";
             using (HttpClient client = new HttpClient()) {
-                client.Timeout = TimeSpan.FromSeconds(100);
-                HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<LossResponse>(responseBody);
+                LossResponse lossResponse = null;
+                client.Timeout = TimeSpan.FromSeconds(3);
+                try {
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    response.EnsureSuccessStatusCode();
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    lossResponse = JsonConvert.DeserializeObject<LossResponse>(responseBody);
+                } catch (TaskCanceledException ex) {
+                    bgWorker.CancelAsync();
+                }
+                return lossResponse;
             }
         }
 
-        private void dateTimePicker_Enter(object sender, EventArgs e) {
+        private async void btnConsultarPerdas_Click(object sender, EventArgs e) {
             listView.Items.Clear();
             listBox.Items.Clear();
             progressBar.Value = 0;
-        }
 
-        private async void btnConsultarPerdas_Click(object sender, EventArgs e) {
             string formattedDate = dateTimePicker.Value.ToString("yyyy-MM-dd");
             listBox.Items.Add($"Consultando perdas para a data: {formattedDate}");
 
             Cursor.Current = Cursors.WaitCursor; // Muda o cursor para o de espera
 
             try {
+                bgWorker.RunWorkerAsync(); // Inicia o processamento em segundo plano
                 LossResponse lossResponse = await GetLossesAsync(formattedDate);
-                listBox.Items.Add("Dados recebidos. Preenchendo ListView...");
 
                 progressBar.Minimum = 0;
                 progressBar.Maximum = lossResponse.Losses.Count;
                 progressBar.Value = 0;
 
-                listView.Items.Clear();
                 if (lossResponse.Losses.Count == 0) {
                     listBox.Items.Add("Nenhuma perda encontrada para a data selecionada.");
                 } else {
+                    listBox.Items.Add("Dados recebidos. Preenchendo ListView...");
                     foreach (var loss in lossResponse.Losses) {
                         ListViewItem item = new ListViewItem(loss.Id.ToString());
                         item.SubItems.Add(loss.Type);
@@ -79,6 +83,21 @@ namespace tati_thiago_dos_santos_p1 {
             } finally {
                 Cursor.Current = Cursors.Default; // Restaura o cursor padrão
             }
+        }
+
+        private void bgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e) {
+            for (int i = 0; i < 100; i++) {
+                System.Threading.Thread.Sleep(100);
+                bgWorker.ReportProgress(i);
+            }
+        }
+
+        private void bgWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e) {
+            listBox.Items.Add($"Progresso: {e.ProgressPercentage}%");
+        }
+
+        private void bgWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e) {
+            listBox.Items.Add("Processamento concluído.");
         }
     }
 }

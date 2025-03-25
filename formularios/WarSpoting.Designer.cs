@@ -28,6 +28,7 @@
             this.listBox = new System.Windows.Forms.ListBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnConsultarPerdas = new System.Windows.Forms.Button();
+            this.bgWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // listView
@@ -75,6 +76,13 @@
             this.btnConsultarPerdas.UseVisualStyleBackColor = true;
             this.btnConsultarPerdas.Click += new System.EventHandler(this.btnConsultarPerdas_Click);
             // 
+            // bgWorker
+            // 
+            this.bgWorker.WorkerReportsProgress = true;
+            this.bgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgWorker_DoWork);
+            this.bgWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgWorker_ProgressChanged);
+            this.bgWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgWorker_RunWorkerCompleted);
+            // 
             // WarSpoting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -98,5 +106,6 @@
         private System.Windows.Forms.ListBox listBox;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Button btnConsultarPerdas;
+        private System.ComponentModel.BackgroundWorker bgWorker;
     }
 }

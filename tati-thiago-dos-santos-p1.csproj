@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="model\Loss.cs" />
+    <Compile Include="modelo\Loss.cs" />
     <Compile Include="formularios\WarSpoting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="resources\Anotacoes.txt" />
+    <Content Include="recursos\Anotacoes.txt" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
