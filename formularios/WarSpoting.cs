@@ -41,26 +41,26 @@ namespace tati_thiago_dos_santos_p1 {
         }
 
         private async void btnConsultarPerdas_Click(object sender, EventArgs e) {
-            listView.Items.Clear();
-            listBox.Items.Clear();
             progressBar.Value = 0;
+            listBox.Items.Clear();
+            listView.Items.Clear();
 
             string formattedDate = dateTimePicker.Value.ToString("yyyy-MM-dd");
             listBox.Items.Add($"Consultando perdas para a data: {formattedDate}");
-
-            Cursor.Current = Cursors.WaitCursor; // Muda o cursor para o de espera
 
             try {
                 bgWorker.RunWorkerAsync(); // Inicia o processamento em segundo plano
                 LossResponse lossResponse = await GetLossesAsync(formattedDate);
 
-                progressBar.Minimum = 0;
-                progressBar.Maximum = lossResponse.Losses.Count;
-                progressBar.Value = 0;
-
-                if (lossResponse.Losses.Count == 0) {
+                if (lossResponse == null || lossResponse.Losses.Count == 0) {
                     listBox.Items.Add("Nenhuma perda encontrada para a data selecionada.");
+                    bgWorker.CancelAsync();
                 } else {
+                    bgWorker.CancelAsync();
+                    progressBar.Value = 0;
+                    progressBar.Minimum = 0;
+                    progressBar.Maximum = lossResponse.Losses.Count;
+
                     listBox.Items.Add("Dados recebidos. Preenchendo ListView...");
                     foreach (var loss in lossResponse.Losses) {
                         ListViewItem item = new ListViewItem(loss.Id.ToString());
@@ -80,20 +80,24 @@ namespace tati_thiago_dos_santos_p1 {
                 }
             } catch (HttpRequestException ex) {
                 listBox.Items.Add($"Erro na requisição: {ex.Message}");
-            } finally {
-                Cursor.Current = Cursors.Default; // Restaura o cursor padrão
             }
         }
 
         private void bgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e) {
             for (int i = 0; i < 100; i++) {
-                System.Threading.Thread.Sleep(100);
-                bgWorker.ReportProgress(i);
+                if (!bgWorker.CancellationPending){
+                    System.Threading.Thread.Sleep(100);
+                    bgWorker.ReportProgress(i);
+                }
             }
         }
 
         private void bgWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e) {
-            listBox.Items.Add($"Progresso: {e.ProgressPercentage}%");
+            if (listBox.Items.Count == 1){
+                listBox.Items.Add($"Processando... {e.ProgressPercentage}%");
+            } else {
+                listBox.Items[listBox.Items.Count - 1] = $"Processando... {e.ProgressPercentage}%";
+            }
         }
 
         private void bgWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e) {

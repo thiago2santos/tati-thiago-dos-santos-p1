@@ -33,37 +33,43 @@
             // 
             // listView
             // 
+            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listView.HideSelection = false;
-            this.listView.Location = new System.Drawing.Point(9, 32);
-            this.listView.Margin = new System.Windows.Forms.Padding(2);
+            this.listView.Location = new System.Drawing.Point(9, 113);
+            this.listView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(540, 251);
+            this.listView.Size = new System.Drawing.Size(938, 251);
             this.listView.TabIndex = 1;
             this.listView.UseCompatibleStateImageBehavior = false;
             // 
             // dateTimePicker
             // 
             this.dateTimePicker.Location = new System.Drawing.Point(9, 10);
-            this.dateTimePicker.Margin = new System.Windows.Forms.Padding(2);
+            this.dateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(220, 20);
             this.dateTimePicker.TabIndex = 2;
             // 
             // listBox
             // 
+            this.listBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox.FormattingEnabled = true;
-            this.listBox.Location = new System.Drawing.Point(9, 288);
-            this.listBox.Margin = new System.Windows.Forms.Padding(2);
+            this.listBox.Location = new System.Drawing.Point(9, 372);
+            this.listBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(540, 69);
+            this.listBox.Size = new System.Drawing.Size(938, 69);
             this.listBox.TabIndex = 3;
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(10, 362);
-            this.progressBar.Margin = new System.Windows.Forms.Padding(2);
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar.Location = new System.Drawing.Point(10, 446);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(538, 19);
+            this.progressBar.Size = new System.Drawing.Size(935, 19);
             this.progressBar.TabIndex = 4;
             // 
             // btnConsultarPerdas
@@ -79,6 +85,7 @@
             // bgWorker
             // 
             this.bgWorker.WorkerReportsProgress = true;
+            this.bgWorker.WorkerSupportsCancellation = true;
             this.bgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgWorker_DoWork);
             this.bgWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgWorker_ProgressChanged);
             this.bgWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgWorker_RunWorkerCompleted);
@@ -87,13 +94,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 396);
+            this.ClientSize = new System.Drawing.Size(963, 480);
             this.Controls.Add(this.btnConsultarPerdas);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.listBox);
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.listView);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "WarSpoting";
             this.Text = "War Spoting";
             this.ResumeLayout(false);
