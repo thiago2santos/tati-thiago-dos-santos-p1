@@ -12,15 +12,15 @@ namespace tati_thiago_dos_santos_p1 {
             listView.FullRowSelect = true;
             listView.GridLines = true;
             listView.Columns.Add("ID", 50);
-            listView.Columns.Add("Tipo", 100);
-            listView.Columns.Add("Modelo", 100);
+            listView.Columns.Add("Tipo", 150);
+            listView.Columns.Add("Modelo", 150);
             listView.Columns.Add("Status", 100);
-            listView.Columns.Add("Perdido por", 100);
+            //listView.Columns.Add("Perdido por", 100);
             listView.Columns.Add("Data", 100);
-            listView.Columns.Add("Local mais próximo", 100);
+            //listView.Columns.Add("Local mais próximo", 100);
             listView.Columns.Add("Geo", 100);
             listView.Columns.Add("Unidade", 100);
-            listView.Columns.Add("Tags", 100);
+            listView.Columns.Add("Tags", 150);
         }
 
         private async Task<LossResponse> GetLossesAsync(string date) {
@@ -67,9 +67,9 @@ namespace tati_thiago_dos_santos_p1 {
                         item.SubItems.Add(loss.Type);
                         item.SubItems.Add(loss.Model);
                         item.SubItems.Add(loss.Status);
-                        item.SubItems.Add(loss.LostBy);
+                        //item.SubItems.Add(loss.LostBy);
                         item.SubItems.Add(loss.Date.ToString("yyyy-MM-dd"));
-                        item.SubItems.Add(loss.NearestLocation);
+                        //item.SubItems.Add(loss.NearestLocation);
                         item.SubItems.Add(loss.Geo);
                         item.SubItems.Add(loss.Unit ?? "N/A");
                         item.SubItems.Add(loss.Tags != null ? string.Join(", ", loss.Tags) : "N/A");
@@ -93,15 +93,12 @@ namespace tati_thiago_dos_santos_p1 {
         }
 
         private void bgWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e) {
-            if (listBox.Items.Count == 1){
-                listBox.Items.Add($"Processando... {e.ProgressPercentage}%");
-            } else {
-                listBox.Items[listBox.Items.Count - 1] = $"Processando... {e.ProgressPercentage}%";
-            }
+
         }
 
         private void bgWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e) {
             listBox.Items.Add("Processamento concluído.");
+            progressBar.Value = 0;
         }
     }
 }
