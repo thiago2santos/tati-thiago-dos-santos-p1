@@ -35,6 +35,7 @@ namespace tati_thiago_dos_santos_p1 {
                     lossResponse = JsonConvert.DeserializeObject<LossResponse>(responseBody);
                 } catch (TaskCanceledException ex) {
                     bgWorker.CancelAsync();
+                    listBox.Items.Add("A requisição foi cancelada. O tempo limite foi atingido.");
                 }
                 return lossResponse;
             }
@@ -51,12 +52,9 @@ namespace tati_thiago_dos_santos_p1 {
             try {
                 bgWorker.RunWorkerAsync(); // Inicia o processamento em segundo plano
                 LossResponse lossResponse = await GetLossesAsync(formattedDate);
+                bgWorker.CancelAsync();
 
-                if (lossResponse == null || lossResponse.Losses.Count == 0) {
-                    listBox.Items.Add("Nenhuma perda encontrada para a data selecionada.");
-                    bgWorker.CancelAsync();
-                } else {
-                    bgWorker.CancelAsync();
+                if (lossResponse != null && lossResponse.Losses.Count != 0) {
                     progressBar.Value = 0;
                     progressBar.Minimum = 0;
                     progressBar.Maximum = lossResponse.Losses.Count;
@@ -77,28 +75,16 @@ namespace tati_thiago_dos_santos_p1 {
                         progressBar.Value++;
                     }
                     listBox.Items.Add("ListView preenchido com sucesso.");
+
+                } else if (lossResponse != null && lossResponse.Losses.Count == 0) {
+                    listBox.Items.Add("Nenhuma perda encontrada para a data selecionada.");
                 }
             } catch (HttpRequestException ex) {
                 listBox.Items.Add($"Erro na requisição: {ex.Message}");
+            } finally {
+                progressBar.Value = 0;
             }
-        }
-
-        private void bgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e) {
-            for (int i = 0; i < 100; i++) {
-                if (!bgWorker.CancellationPending){
-                    System.Threading.Thread.Sleep(100);
-                    bgWorker.ReportProgress(i);
-                }
-            }
-        }
-
-        private void bgWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e) {
-
-        }
-
-        private void bgWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e) {
-            listBox.Items.Add("Processamento concluído.");
-            progressBar.Value = 0;
         }
     }
 }
+
