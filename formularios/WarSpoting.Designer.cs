@@ -29,6 +29,11 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnConsultarPerdas = new System.Windows.Forms.Button();
             this.bgWorker = new System.ComponentModel.BackgroundWorker();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblData = new System.Windows.Forms.Label();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView
@@ -45,7 +50,7 @@
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(9, 10);
+            this.dateTimePicker.Location = new System.Drawing.Point(9, 50);
             this.dateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(220, 20);
@@ -74,9 +79,12 @@
             // 
             // btnConsultarPerdas
             // 
-            this.btnConsultarPerdas.Location = new System.Drawing.Point(244, 8);
+            this.btnConsultarPerdas.AutoSize = true;
+            this.btnConsultarPerdas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarPerdas.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnConsultarPerdas.Location = new System.Drawing.Point(239, 48);
             this.btnConsultarPerdas.Name = "btnConsultarPerdas";
-            this.btnConsultarPerdas.Size = new System.Drawing.Size(107, 23);
+            this.btnConsultarPerdas.Size = new System.Drawing.Size(96, 23);
             this.btnConsultarPerdas.TabIndex = 5;
             this.btnConsultarPerdas.Text = "Consultar perdas";
             this.btnConsultarPerdas.UseVisualStyleBackColor = true;
@@ -87,20 +95,61 @@
             this.bgWorker.WorkerReportsProgress = true;
             this.bgWorker.WorkerSupportsCancellation = true;
             // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.arquivoToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(963, 24);
+            this.menuStrip.TabIndex = 6;
+            this.menuStrip.Text = "menuStrip1";
+            // 
+            // arquivoToolStripMenuItem
+            // 
+            this.arquivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sairToolStripMenuItem});
+            this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
+            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.arquivoToolStripMenuItem.Text = "Arquivo";
+            // 
+            // sairToolStripMenuItem
+            // 
+            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sairToolStripMenuItem.Text = "Sair";
+            this.sairToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
+            // 
+            // lblData
+            // 
+            this.lblData.AutoSize = true;
+            this.lblData.Location = new System.Drawing.Point(9, 32);
+            this.lblData.Name = "lblData";
+            this.lblData.Size = new System.Drawing.Size(101, 13);
+            this.lblData.TabIndex = 7;
+            this.lblData.Text = "Selecione uma data";
+            // 
             // WarSpoting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(963, 480);
+            this.Controls.Add(this.lblData);
             this.Controls.Add(this.btnConsultarPerdas);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.listBox);
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.listView);
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "WarSpoting";
             this.Text = "War Spoting";
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -111,5 +160,9 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Button btnConsultarPerdas;
         private System.ComponentModel.BackgroundWorker bgWorker;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem arquivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
+        private System.Windows.Forms.Label lblData;
     }
 }

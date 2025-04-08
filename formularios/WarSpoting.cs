@@ -85,6 +85,10 @@ namespace tati_thiago_dos_santos_p1 {
                 progressBar.Value = 0;
             }
         }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
     }
 }
 
