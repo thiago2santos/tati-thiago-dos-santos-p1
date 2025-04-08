@@ -83,6 +83,7 @@ namespace tati_thiago_dos_santos_p1 {
                 listBox.Items.Add($"Erro na requisição: {ex.Message}");
             } finally {
                 progressBar.Value = 0;
+                webBrowser.Navigate("https://www.google.com/maps/@-23.1750195,-46.8543534,15z");
             }
         }
 
