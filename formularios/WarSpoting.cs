@@ -3,13 +3,29 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using CefSharp;
+using CefSharp.WinForms;
 
 namespace tati_thiago_dos_santos_p1 {
     public partial class WarSpoting : Form {
+        public ChromiumWebBrowser chromeBrowser;
+
+        public void InitializeChromium() {
+            CefSettings settings = new CefSettings();
+            // Initialize cef with the provided settings
+            Cef.Initialize(settings);
+            // Create a browser component
+            chromeBrowser = new ChromiumWebBrowser("https://fatecjd.edu.br/site/");
+            // Add it to the form and fill it to the form window.
+            this.tabLocalizacao.Controls.Add(chromeBrowser);
+            chromeBrowser.Dock = DockStyle.Fill;
+        }
+
         private LossResponse lossResponse { get; set; }
 
         public WarSpoting() {
             InitializeComponent();
+            InitializeChromium();
             listView.View = View.Details;
             listView.FullRowSelect = true;
             listView.GridLines = true;
@@ -82,9 +98,7 @@ namespace tati_thiago_dos_santos_p1 {
             } catch (HttpRequestException ex) {
                 listBox.Items.Add($"Erro na requisição: {ex.Message}");
             } finally {
-                progressBar.Value = 0;
-                webBrowser.Navigate("https://www.google.com/maps/@-23.1750195,-46.8543534,15z");
-            }
+                progressBar.Value = 0;            }
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -214,6 +228,10 @@ namespace tati_thiago_dos_santos_p1 {
 
         private void txtOutroValorUnico_KeyDown(object sender, KeyEventArgs e) {
             toolStripStatusLabel.Text = ""; 
+        }
+
+        private void WarSpoting_Load(object sender, EventArgs e) {
+
         }
     }
 }
