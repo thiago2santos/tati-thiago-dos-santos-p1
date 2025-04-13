@@ -1,5 +1,5 @@
 ﻿namespace tati_thiago_dos_santos_p1 {
-    partial class WarSpoting {
+    partial class WarSpotingForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -33,9 +33,9 @@
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblData = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabDetalhes = new System.Windows.Forms.TabPage();
+            this.tabPerdas = new System.Windows.Forms.TabPage();
             this.listView = new System.Windows.Forms.ListView();
-            this.tabLocalizacao = new System.Windows.Forms.TabPage();
+            this.tabMapa = new System.Windows.Forms.TabPage();
             this.tabPatrocinar = new System.Windows.Forms.TabPage();
             this.radioBContribuicaoMensal = new System.Windows.Forms.RadioButton();
             this.radioBContribuicaoUnica = new System.Windows.Forms.RadioButton();
@@ -67,8 +67,7 @@
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.tabDetalhes.SuspendLayout();
-            this.tabLocalizacao.SuspendLayout();
+            this.tabPerdas.SuspendLayout();
             this.tabPatrocinar.SuspendLayout();
             this.grpBoxContribuicaoUnica.SuspendLayout();
             this.grpBoxContribuicaoMensal.SuspendLayout();
@@ -167,8 +166,8 @@
             this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tabDetalhes);
-            this.tabControl.Controls.Add(this.tabLocalizacao);
+            this.tabControl.Controls.Add(this.tabPerdas);
+            this.tabControl.Controls.Add(this.tabMapa);
             this.tabControl.Controls.Add(this.tabPatrocinar);
             this.tabControl.Location = new System.Drawing.Point(10, 129);
             this.tabControl.Margin = new System.Windows.Forms.Padding(4);
@@ -177,17 +176,17 @@
             this.tabControl.Size = new System.Drawing.Size(1237, 333);
             this.tabControl.TabIndex = 8;
             // 
-            // tabDetalhes
+            // tabPerdas
             // 
-            this.tabDetalhes.Controls.Add(this.listView);
-            this.tabDetalhes.Location = new System.Drawing.Point(4, 25);
-            this.tabDetalhes.Margin = new System.Windows.Forms.Padding(4);
-            this.tabDetalhes.Name = "tabDetalhes";
-            this.tabDetalhes.Padding = new System.Windows.Forms.Padding(4);
-            this.tabDetalhes.Size = new System.Drawing.Size(1229, 304);
-            this.tabDetalhes.TabIndex = 0;
-            this.tabDetalhes.Text = "Detalhes";
-            this.tabDetalhes.UseVisualStyleBackColor = true;
+            this.tabPerdas.Controls.Add(this.listView);
+            this.tabPerdas.Location = new System.Drawing.Point(4, 25);
+            this.tabPerdas.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPerdas.Name = "tabPerdas";
+            this.tabPerdas.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPerdas.Size = new System.Drawing.Size(1229, 304);
+            this.tabPerdas.TabIndex = 0;
+            this.tabPerdas.Text = "Perdas";
+            this.tabPerdas.UseVisualStyleBackColor = true;
             // 
             // listView
             // 
@@ -199,17 +198,20 @@
             this.listView.Size = new System.Drawing.Size(1221, 296);
             this.listView.TabIndex = 1;
             this.listView.UseCompatibleStateImageBehavior = false;
+            this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
+            this.listView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseClick);
+            this.listView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseDoubleClick);
             // 
-            // tabLocalizacao
+            // tabMapa
             // 
-            this.tabLocalizacao.Location = new System.Drawing.Point(4, 25);
-            this.tabLocalizacao.Margin = new System.Windows.Forms.Padding(4);
-            this.tabLocalizacao.Name = "tabLocalizacao";
-            this.tabLocalizacao.Padding = new System.Windows.Forms.Padding(4);
-            this.tabLocalizacao.Size = new System.Drawing.Size(1229, 304);
-            this.tabLocalizacao.TabIndex = 1;
-            this.tabLocalizacao.Text = "Localização";
-            this.tabLocalizacao.UseVisualStyleBackColor = true;
+            this.tabMapa.Location = new System.Drawing.Point(4, 25);
+            this.tabMapa.Margin = new System.Windows.Forms.Padding(4);
+            this.tabMapa.Name = "tabMapa";
+            this.tabMapa.Padding = new System.Windows.Forms.Padding(4);
+            this.tabMapa.Size = new System.Drawing.Size(1229, 304);
+            this.tabMapa.TabIndex = 1;
+            this.tabMapa.Text = "Mapa";
+            this.tabMapa.UseVisualStyleBackColor = true;
             // 
             // tabPatrocinar
             // 
@@ -555,7 +557,7 @@
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
-            // WarSpoting
+            // WarSpotingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -571,14 +573,12 @@
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "WarSpoting";
+            this.Name = "WarSpotingForm";
             this.Text = "War Spoting";
-            this.Load += new System.EventHandler(this.WarSpoting_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.tabControl.ResumeLayout(false);
-            this.tabDetalhes.ResumeLayout(false);
-            this.tabLocalizacao.ResumeLayout(false);
+            this.tabPerdas.ResumeLayout(false);
             this.tabPatrocinar.ResumeLayout(false);
             this.tabPatrocinar.PerformLayout();
             this.grpBoxContribuicaoUnica.ResumeLayout(false);
@@ -605,9 +605,9 @@
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
         private System.Windows.Forms.Label lblData;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabDetalhes;
+        private System.Windows.Forms.TabPage tabPerdas;
         private System.Windows.Forms.ListView listView;
-        private System.Windows.Forms.TabPage tabLocalizacao;
+        private System.Windows.Forms.TabPage tabMapa;
         private System.Windows.Forms.TabPage tabPatrocinar;
         private System.Windows.Forms.GroupBox grpBox;
         private System.Windows.Forms.ComboBox cBoxTipo;

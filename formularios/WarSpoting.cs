@@ -7,7 +7,7 @@ using CefSharp;
 using CefSharp.WinForms;
 
 namespace tati_thiago_dos_santos_p1 {
-    public partial class WarSpoting : Form {
+    public partial class WarSpotingForm : Form {
         public ChromiumWebBrowser chromeBrowser;
 
         public void InitializeChromium() {
@@ -17,13 +17,13 @@ namespace tati_thiago_dos_santos_p1 {
             // Create a browser component
             chromeBrowser = new ChromiumWebBrowser("https://fatecjd.edu.br/site/");
             // Add it to the form and fill it to the form window.
-            this.tabLocalizacao.Controls.Add(chromeBrowser);
+            this.tabMapa.Controls.Add(chromeBrowser);
             chromeBrowser.Dock = DockStyle.Fill;
         }
 
         private LossResponse lossResponse { get; set; }
 
-        public WarSpoting() {
+        public WarSpotingForm() {
             InitializeComponent();
             InitializeChromium();
             listView.View = View.Details;
@@ -151,6 +151,9 @@ namespace tati_thiago_dos_santos_p1 {
                     listView.Items.Add(item);
                 }
             }
+            if(tabControl.SelectedTab != tabPerdas) {
+                tabControl.SelectedTab = tabPerdas;
+            }
         }
 
         private void cBoxModelo_SelectedIndexChanged(object sender, EventArgs e) {
@@ -168,6 +171,9 @@ namespace tati_thiago_dos_santos_p1 {
                     listView.Items.Add(item);
                 }
             }
+            if (tabControl.SelectedTab != tabPerdas) {
+                tabControl.SelectedTab = tabPerdas;
+            }
         }
 
         private void cBoxStatus_SelectedIndexChanged(object sender, EventArgs e) {
@@ -184,6 +190,9 @@ namespace tati_thiago_dos_santos_p1 {
                     item.SubItems.Add(loss.Tags != null ? string.Join(", ", loss.Tags) : "N/A");
                     listView.Items.Add(item);
                 }
+            }
+            if (tabControl.SelectedTab != tabPerdas) {
+                tabControl.SelectedTab = tabPerdas;
             }
         }
 
@@ -230,7 +239,48 @@ namespace tati_thiago_dos_santos_p1 {
             toolStripStatusLabel.Text = ""; 
         }
 
-        private void WarSpoting_Load(object sender, EventArgs e) {
+        private void listView_MouseDoubleClick(object sender, MouseEventArgs e) {
+            if (listView.SelectedItems.Count > 0) {
+                toolStripStatusLabel.Text = "";
+                // Obtém a linha selecionada
+                ListViewItem selectedItem = listView.SelectedItems[0];
+
+                // Obtém o valor da coluna "Geo"
+                string geoLocation = selectedItem.SubItems[5].Text; // Índice 5 corresponde à coluna "Geo"
+
+                // Verifica se a geolocalização está disponível
+                if (!string.IsNullOrEmpty(geoLocation) && geoLocation.Contains(",")) {
+                    // Navega para a localização no mapa
+                    chromeBrowser.Load($"https://www.google.com/maps?q={geoLocation}");
+                    tabControl.SelectedTab = tabMapa;
+                } else {
+                    chromeBrowser.Load("about:blank");
+                    toolStripStatusLabel.Text = "Geolocalização inválida ou não disponível.";
+                }
+            }
+
+        }
+
+        private void listView_SelectedIndexChanged(object sender, EventArgs e) {
+            if (listView.SelectedItems.Count > 0) {
+                // Obtém a linha selecionada
+                ListViewItem selectedItem = listView.SelectedItems[0];
+
+                // Obtém o valor da coluna "Geo"
+                string geoLocation = selectedItem.SubItems[5].Text; // Índice 5 corresponde à coluna "Geo"
+
+                // Verifica se a geolocalização está disponível
+                if (!string.IsNullOrEmpty(geoLocation) && geoLocation.Contains(",")) {
+                    // Navega para a localização no mapa
+                    chromeBrowser.Load($"https://www.google.com/maps?q={geoLocation}");
+                } else {
+                    chromeBrowser.Load("about:blank");
+                }
+            }
+        }
+
+        private void listView_MouseClick(object sender, MouseEventArgs e) {
+            toolStripStatusLabel.Text = "";
 
         }
     }
