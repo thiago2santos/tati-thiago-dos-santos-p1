@@ -172,6 +172,49 @@ namespace tati_thiago_dos_santos_p1 {
                 }
             }
         }
+
+        private void radioBContribuicaoUnica_CheckedChanged(object sender, EventArgs e) {
+            grpBoxContribuicaoUnica.Enabled = true;
+            grpBoxContribuicaoUnica.Visible = true;
+            grpBoxContribuicaoMensal.SendToBack();  
+            grpBoxContribuicaoUnica.BringToFront();
+            grpBoxContribuicaoUnica.Location = new System.Drawing.Point(28, 58);
+        }
+
+        private void radioBContribuicaoMensal_CheckedChanged(object sender, EventArgs e) {
+            grpBoxContribuicaoMensal.Enabled = true;
+            grpBoxContribuicaoMensal.Visible = true;
+            grpBoxContribuicaoMensal.BringToFront();
+            grpBoxContribuicaoMensal.Location = new System.Drawing.Point(28, 58);
+        }
+
+        private void btnLimparFiltros_Click(object sender, EventArgs e) {
+            cBoxTipo.SelectedIndex = 0;
+            cBoxModelo.SelectedIndex = 0;
+            cBoxStatus.SelectedIndex = 0;
+        }
+
+        private void txtDoarOutroValorMensal_KeyPress(object sender, KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) {
+                e.Handled = true; // Bloqueia a entrada
+                toolStripStatusLabel.Text = "Apenas números são permitidos.";   
+            }
+        }
+
+        private void txtDoarOutroValorMensal_KeyDown(object sender, KeyEventArgs e) {
+            toolStripStatusLabel.Text = "";
+        }
+
+        private void txtOutroValorUnico_KeyPress(object sender, KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) {
+                e.Handled = true; // Bloqueia a entrada
+                toolStripStatusLabel.Text = "Apenas números são permitidos.";
+            }
+        }
+
+        private void txtOutroValorUnico_KeyDown(object sender, KeyEventArgs e) {
+            toolStripStatusLabel.Text = ""; 
+        }
     }
 }
 
