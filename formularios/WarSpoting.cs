@@ -251,7 +251,7 @@ namespace tati_thiago_dos_santos_p1 {
                 // Verifica se a geolocalização está disponível
                 if (!string.IsNullOrEmpty(geoLocation) && geoLocation.Contains(",")) {
                     // Navega para a localização no mapa
-                    chromeBrowser.Load($"https://www.google.com/maps?q={geoLocation}");
+                    chromeBrowser.Load($"https://www.google.com/maps?hl=pt-br&t=k&q={geoLocation}");
                     tabControl.SelectedTab = tabMapa;
                 } else {
                     chromeBrowser.Load("about:blank");
@@ -272,7 +272,7 @@ namespace tati_thiago_dos_santos_p1 {
                 // Verifica se a geolocalização está disponível
                 if (!string.IsNullOrEmpty(geoLocation) && geoLocation.Contains(",")) {
                     // Navega para a localização no mapa
-                    chromeBrowser.Load($"https://www.google.com/maps?q={geoLocation}");
+                    chromeBrowser.Load($"https://www.google.com/maps?hl=pt-br&t=k&q={geoLocation}");
                 } else {
                     chromeBrowser.Load("about:blank");
                 }
@@ -282,6 +282,11 @@ namespace tati_thiago_dos_santos_p1 {
         private void listView_MouseClick(object sender, MouseEventArgs e) {
             toolStripStatusLabel.Text = "";
 
+        }
+
+        private void warSpotingForm_FormClosing(object sender, FormClosingEventArgs e) {
+            // Libera os recursos do CefSharp
+            Cef.Shutdown();
         }
     }
 }
